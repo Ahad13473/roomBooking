@@ -2,3 +2,8 @@
 
 
 <%= render partial: "room/search_by_date",  locals: {room: @room}%>
+
+<br><br><br>
+<div id="show_rooms">
+<%= render partial: "room/show_all_rooms", locals: { day: @day, date: @date, room: @room } %>
+</div>
