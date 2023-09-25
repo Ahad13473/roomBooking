@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   post 'room/search_room'
   post 'room/room_slots'
-  post 'room/check_availability'
+  post 'room/make_booking'
 end

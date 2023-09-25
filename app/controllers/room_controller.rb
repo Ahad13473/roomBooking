@@ -28,7 +28,40 @@ class RoomController < ApplicationController
       end
     end
 
-    def check_availability
-      debugger
+    def make_booking
+     if find_already_booked? 
+      make_new_booking
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("booking_message", "Booking Saved Successfully!")
+        end
+      end
+    else
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("booking_message", "Already Booked Choose other")
+        end
+      end
     end
+    end
+
+    private
+    def find_already_booked?
+      slot = params[:slot] if params[:slot]
+      found = BookedSlot.find_by(slot_id: slot[:slot_id], on_date: slot[:date], room_id: slot[:room])
+      found ? false : true
+    end
+
+    def make_new_booking
+      slot = params[:slot] if params[:slot]
+      @slot_booked = BookedSlot.create(slot_id: slot[:slot_id],
+                                        room_id: slot[:room],
+                                        name: slot[:name],
+                                        email: slot[:email],
+                                        on_day: slot[:day],
+                                        on_date: slot[:date])
+
+      @slot_booked ? true : false
+
+      end
 end
