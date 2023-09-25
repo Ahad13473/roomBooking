@@ -6,12 +6,12 @@ class RoomController < ApplicationController
         
         respond_to do |format|
           format.turbo_stream do
-            render turbo_stream: turbo_stream.append("show_rooms", partial: "room/show_all_rooms",
+            render turbo_stream: turbo_stream.update("show_rooms", partial: "room/show_all_rooms",
             locals: {day: @day_on_that_date, date: @date, room: @room})
           end
         end
 
-    end
+    end #search_room
 
 
     def room_slots
@@ -26,11 +26,11 @@ class RoomController < ApplicationController
           locals: {day: @day, date: @date, room: @room, slots: @slots, slot: @slot, val: 0})
         end
       end
-    end
+    end #room_slots
 
     def make_booking
-     if find_already_booked? 
-      make_new_booking
+     if find_already_booked? #it should be true on not finding any relative booking
+      make_new_booking #make new booking
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.update("booking_message", "Booking Saved Successfully!")
@@ -43,14 +43,16 @@ class RoomController < ApplicationController
         end
       end
     end
-    end
+    end #make_booking
 
     private
     def find_already_booked?
       slot = params[:slot] if params[:slot]
-      found = BookedSlot.find_by(slot_id: slot[:slot_id], on_date: slot[:date], room_id: slot[:room])
-      found ? false : true
-    end
+      found =  Slot.joins(:booked_slot)
+                   .where(booked_slots: {slot_id: slot[:slot_id], on_date: slot[:date], room_id: slot[:room]})
+                   .pluck("booked_slots.id")
+      found.empty? ? true : false
+    end #find_already_booked
 
     def make_new_booking
       slot = params[:slot] if params[:slot]
@@ -62,6 +64,6 @@ class RoomController < ApplicationController
                                         on_date: slot[:date])
 
       @slot_booked ? true : false
-
-      end
+    end #make_new_booking
+      
 end

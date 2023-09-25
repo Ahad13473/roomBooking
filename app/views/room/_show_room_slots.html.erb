@@ -14,7 +14,7 @@
             <%= form.hidden_field :day, value: day %>
             <%= form.hidden_field :date, value: date %>
             <%= form.hidden_field :room, value: room.id %>
-            <%= form.radio_button :slot_id, s.id , id: "radio_hit_#{val = val + 1}" , :disabled => if_already_booked(s) %>
+            <%= form.radio_button :slot_id, s.id , id: "radio_hit_#{val = val + 1}" , :disabled => if_already_booked(s, date, room.id) %>
           </td>
         </tr>
       <% end %> 
