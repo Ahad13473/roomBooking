@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slot_id: 1
+  name: MyString
+  email: MyString
+  on_day: MyString
+  on_date: 2023-09-26
+  room_id: 1
+
+two:
+  slot_id: 1
+  name: MyString
+  email: MyString
+  on_day: MyString
+  on_date: 2023-09-26
+  room_id: 1

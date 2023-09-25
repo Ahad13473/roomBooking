@@ -1,16 +1,7 @@
-
 <% if date && day %>
-<span> Date: <%= date %></span> <br>
-<span> Day: <%= day %></span> <br><br>
+<span> <strong>Date:</strong> <%= date %></span> <br>
+<span> <strong>Day:</strong> <%= day %></span> <br><br>
 
-
-
-<%= form_for(room, url: root_path) do |r| %>
-   <%= r.label :room %>
-   <%= r.select :name , room_names %>
-<% end %>
-
-
-
+<%= render partial: 'room/form', locals: {day: day, date: date, room: room} %>
 
 <% end %>

@@ -12,4 +12,23 @@ class RoomController < ApplicationController
         end
 
     end
+
+
+    def room_slots
+      @room = Room.find(params[:room][:name])
+      @slots = @room.slots
+      @day = params[:room][:day]
+      @date = params[:room][:date]
+      @slot = Slot.new
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append("show_room_slots", partial: "room/show_room_slots",
+          locals: {day: @day, date: @date, room: @room, slots: @slots, slot: @slot, val: 0})
+        end
+      end
+    end
+
+    def check_availability
+      debugger
+    end
 end

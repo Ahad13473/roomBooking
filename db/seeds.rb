@@ -7,9 +7,15 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-names = ["Diamond", "Ruby", "Zirconia"]
+# names = ["Diamond", "Ruby", "Zirconia"]
 
-names.each do |name|
-    Room.create(name: name)
-end
+# names.each do |name|
+#     Room.create(name: name)
+# end
 
+# slots = ["0800", "0900", "1000", "1100"]
+# Room.all.each do |room|
+#  slots.each do |slot|
+#     Slot.create(room_id: room.id, time: slot)
+#  end
+# end

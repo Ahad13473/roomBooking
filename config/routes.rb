@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   post 'room/search_room'
+  post 'room/room_slots'
+  post 'room/check_availability'
 end

@@ -1,0 +1,2 @@
+class BookedSlot < ApplicationRecord
+end
