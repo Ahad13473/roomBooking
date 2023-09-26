@@ -8,3 +8,4 @@ Rails.application.routes.draw do
   post 'room/room_slots'
   post 'room/make_booking'
 end
+ 
