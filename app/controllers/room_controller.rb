@@ -34,10 +34,18 @@ class RoomController < ApplicationController
     def make_booking
      if find_already_booked? #it should be true on not finding any relative booking
       make_new_booking #make new booking
-      respond_to do |format|
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.update("booking_message", "Booking Saved Successfully!")
+      if @slot_booked.valid?
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update("booking_message", "Booking Saved Successfully!")
+          end
         end
+      else
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.update("booking_message", "#{@slot_booked.errors.full_messages.first}")
+          end
+      end
       end
     else
       respond_to do |format|
@@ -65,8 +73,7 @@ class RoomController < ApplicationController
                                         email: slot[:email],
                                         on_day: slot[:day],
                                         on_date: slot[:date])
-
-      @slot_booked ? true : false
+        @slot_booked ? true : false
     end #make_new_booking
       
 end

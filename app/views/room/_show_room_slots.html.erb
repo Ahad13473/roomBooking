@@ -14,7 +14,7 @@
             <%= form.hidden_field :day, value: day %>
             <%= form.hidden_field :date, value: date %>
             <%= form.hidden_field :room, value: room.id %>
-            <%= form.radio_button :slot_id, s.id , id: "radio_hit_#{val = val + 1}" , :disabled => if_already_booked(s, date, room.id) %>
+            <%= form.radio_button :slot_id, s.id , class: "radio_button_hit" , :disabled => if_already_booked(s, date, room.id) %>
           </td>
         </tr>
       <% end %> 
@@ -44,22 +44,7 @@
 $(document).ready(function(){
     $("#show_name_field").hide();
     $("#show_email_field").hide();
-    $("#radio_hit_1").change(function(){
-        $("#show_name_field").show();
-        $("#show_email_field").show();
-    })
-
-    $("#radio_hit_2").change(function(){
-        $("#show_name_field").show();
-        $("#show_email_field").show();
-    })
-
-    $("#radio_hit_3").change(function(){
-        $("#show_name_field").show();
-        $("#show_email_field").show();
-    })
-
-    $("#radio_hit_4").change(function(){
+    $(".radio_button_hit").change(function(){
         $("#show_name_field").show();
         $("#show_email_field").show();
     })
