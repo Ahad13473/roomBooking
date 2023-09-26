@@ -1,7 +1,6 @@
 
 <%= form_for(room, url: room_search_room_path) do |r| %>
-    
- <%= r.label :select_a_date %> <br>    
-<%= r.date_field :select_a_date %>
-<%= r.submit 'Choose Date' %>
+  <%= r.label :select_a_date %> <br>
+  <%= r.date_field :select_a_date, required: true %>
+  <%= r.submit 'Choose Date' %>
 <% end %>

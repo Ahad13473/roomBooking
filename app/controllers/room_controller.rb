@@ -2,8 +2,11 @@ class RoomController < ApplicationController
     def search_room
         @room = Room.new
         @date = params[:room][:select_a_date] if params[:room][:select_a_date].present?
-        @day_on_that_date = Date.parse(@date).strftime("%A")
-        
+        if @date.present?
+          @day_on_that_date = Date.parse(@date).strftime("%A")
+        else
+          @day_on_that_date = nil
+        end
         respond_to do |format|
           format.turbo_stream do
             render turbo_stream: turbo_stream.update("show_rooms", partial: "room/show_all_rooms",
