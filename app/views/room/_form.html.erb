@@ -2,7 +2,7 @@
 <%= form_for(room, url: room_room_slots_path) do |r| %>
     <span style="display: inline-block;">
       <%= r.label :room, style: "display: inline-block; margin-right: 10px;" %>
-      <%= r.select :name, room_names , {style: "display: inline-block; margin-right: 10px;"} %>
+      <%= select_tag "room_id", options_for_select(room_names.map { |room| [room[0], room[1]] }) %>
       <%= r.hidden_field :day , :value => day %>
       <%= r.hidden_field :date , :value => date %>
       <%= r.submit 'Check availability', style: "display: inline-block;" %>

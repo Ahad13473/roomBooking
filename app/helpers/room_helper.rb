@@ -1,6 +1,6 @@
 module RoomHelper
     def room_names
-       Room.all.count > 0 ?  Room.all.map { |room| [room.name, room.id] } : []
+       Room.all.count > 0 ?  @room = Room.all.map { |room| [room.name, room.id] } : @room = []
     end
 
     def booked_by_user(slot, date, room)
