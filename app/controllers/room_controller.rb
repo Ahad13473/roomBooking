@@ -18,7 +18,7 @@ class RoomController < ApplicationController
 
 
     def room_slots
-      @room = Room.find_by(params[:room_id])
+      @room = Room.find(params[:room_id])
       @slots = @room.slots
       @day = params[:room][:day]
       @date = params[:room][:date]
